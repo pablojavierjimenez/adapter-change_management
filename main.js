@@ -246,7 +246,6 @@ class ServiceNowAdapter extends EventEmitter {
                     }
                 }
                 callback(result);
-
             }
 
         });
