@@ -192,25 +192,24 @@ class ServiceNowAdapter extends EventEmitter {
      */
 
     getRecord(callback) {
-        this.connector.get( (data, error) => {
+        this.connector.get((data, error) => {
             if (error) {
                 console.error(`\nError returned from GET request:\n${JSON.stringify(error)}`);
                 callback(error);
             }
             else {
                 let body = null;
-
+                //log.info(`\nResponse returned from GET request:\n${JSON.stringify(data)}`);
                 if (typeof data == 'object') {
                     if (data.body) {
                         body = JSON.parse(data.body);
                         let result = body.result;
-                        
                         result.forEach((obj, index) => {
                             result[index] = this.getResult(obj);
                         });
-                        
                         log.info("Retunring " + JSON.stringify(result))
                         callback(result);
+                        //return result;
                     }
                 }
             }
@@ -246,6 +245,7 @@ class ServiceNowAdapter extends EventEmitter {
                     }
                 }
                 callback(result);
+
             }
 
         });
